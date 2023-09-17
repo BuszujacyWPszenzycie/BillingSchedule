@@ -1,0 +1,149 @@
+@use 'colors' as *;
+@use 'mixin' as *;
+
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+	font-size: 62.5%;
+}
+
+body {
+	font-family: 'Inter', sans-serif;
+	font-size: 1rem;
+	background-color: $white;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.wrapper {
+	width: 1200px;
+	height: 600px;
+	border: 2px solid $navy;
+	display: flex;
+	// background-color: $light-blue;
+
+	&__left {
+		width: 40%;
+		border-right: 2px solid $navy;
+		background-color: $navy;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		font-family: inherit;
+	}
+	&__right {
+		width: 60%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+	}
+}
+
+.input {
+	transition: background-color 0.4s, border 0.4s;
+	&__div {
+		width: 80%;
+		display: flex;
+		justify-content: space-between;
+		padding: 1rem;
+	}
+	&__label {
+		font-size: 2rem;
+		text-transform: uppercase;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: $white;
+	}
+
+	&__date {
+		@include input;
+	}
+
+	&__number {
+		@include input;
+	}
+
+	&__error {
+		font-size: 1.5rem;
+		text-transform: uppercase;
+		color: $red;
+		opacity: 0;
+		transition: opacity 0.4s;
+	}
+}
+.btn {
+	width: 150px;
+	height: 40px;
+	font-size: 1.6rem;
+	background-color: $light-blue;
+	border: none;
+	text-transform: uppercase;
+	cursor: pointer;
+	font-family: inherit;
+	transition: background-color 0.2s;
+	&:hover {
+		background-color: $light-blue-hover;
+	}
+
+	&__div {
+		width: 80%;
+		display: flex;
+		justify-content: space-between;
+		padding: 1rem;
+	}
+}
+
+.month {
+	&__div-btn {
+		opacity: 0;
+	}
+
+	&__wrapper {
+		width: 100%;
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		padding: 1rem;
+	}
+
+	&__input {
+		@include input;
+		background-color: $navy;
+		color: $white;
+	}
+
+	&__date {
+		width: 20%;
+	}
+
+	&__amount {
+		width: 60%;
+	}
+}
+
+.error-message {
+	opacity: 1;
+	height: 1;
+}
+
+.error-background {
+	border: 1px solid $red;
+	background-color: $light-red;
+}
+
+.show-btn {
+	opacity: 1;
+}
