@@ -3,6 +3,8 @@ const allBtn = document.querySelectorAll('.btn')
 const allErrorsP = document.querySelectorAll('.input__error')
 const wrapperRight = document.querySelector('.wrapper__right')
 const monthBtns = document.querySelector('.month__div-btn')
+const checkingAmount = document.querySelector('.checking__amount')
+const monthInputs = document.querySelectorAll('.month__amount')
 
 const checkInputs = () => {
 	for (let i = 0; i < allInputs.length; i++) {
@@ -46,8 +48,6 @@ const addSchedule = () => {
 	let diffMonth = 0
 	let diffYear = endDateYear - startDateYear
 	const billingValue = allInputs[2].value
-	console.log(startDateYear)
-	console.log(endDateYear)
 	if (endDateYear - startDateYear == 1) {
 		diffMonth = 12 - startDateMonth + endDateMonth + 1
 		console.log(diffMonth)
@@ -67,12 +67,36 @@ const addSchedule = () => {
 		const amountInput = document.createElement('input')
 		amountInput.classList.add('month__input', 'month__amount')
 		amountInput.value = parseFloat(billingValue / diffMonth).toFixed(2)
+		amountInput.addEventListener('keyup', checkAmountFunction)
 		newDiv.appendChild(dateInput)
 		newDiv.appendChild(amountInput)
 		wrapperRight.appendChild(newDiv)
 	}
 
 	monthBtns.classList.add('show-btn')
+	const checkingDiv = document.querySelector('.checking__div')
+	checkingDiv.classList.add('show-checking')
+
+	checkAmountFunction()
+}
+
+const checkAmountFunction = () => {
+	const billingValue = allInputs[2].value
+	const monthInputs = document.querySelectorAll('.month__amount')
+	let monthInputsArray = Array.from(monthInputs)
+	let mySum = 0
+	let myArray = []
+
+	for (i = 0; i < monthInputsArray.length; i++) {
+		mySum = mySum + parseFloat(monthInputsArray[i].value)
+	}
+	checkingAmount.textContent = mySum
+
+	// if (mySum == billingValue) {
+	// 	console.log('ok')
+	// } else {
+	// 	console.log('not ok')
+	// }
 }
 
 const addMonthLine = () => {
@@ -109,7 +133,7 @@ allBtn[0].addEventListener('click', checkInputs)
 allBtn[1].addEventListener('click', clearInputs)
 allBtn[2].addEventListener('click', addMonthLine)
 allBtn[3].addEventListener('click', removeMonthLine)
-allBtn[4].addEventListener('click', checkMonths)
+// allBtn[4].addEventListener('click', checkAmountFunction)
 
 // This is first function adding billing schedule but it was working only within one year
 

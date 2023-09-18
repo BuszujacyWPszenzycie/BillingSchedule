@@ -143,6 +143,33 @@ body {
   width: 60%;
 }
 
+.checking__div {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 50px;
+  opacity: 0;
+}
+.checking__p {
+  text-transform: uppercase;
+  color: #f1f6f9;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.checking__amount {
+  font-size: 1.5rem;
+  border: none;
+  padding: 1rem;
+  background-color: #c5dff8;
+  color: #080202;
+  width: 150px;
+  font-family: inherit;
+  height: 40px;
+}
+
 .error-message {
   opacity: 1;
   height: 1;
@@ -154,5 +181,9 @@ body {
 }
 
 .show-btn {
+  opacity: 1;
+}
+
+.show-checking {
   opacity: 1;
 }/*# sourceMappingURL=main.css.map */

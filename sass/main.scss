@@ -140,6 +140,31 @@ body {
 	}
 }
 
+.checking {
+	&__div {
+		// width: 100%;
+		margin-top: 1rem;
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		height: 50px;
+		opacity: 0;
+	}
+	&__p {
+		text-transform: uppercase;
+		color: $white;
+		font-size: 2rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&__amount {
+		@include input;
+		height: 40px;
+	}
+}
+
 .error-message {
 	opacity: 1;
 	height: 1;
@@ -151,5 +176,9 @@ body {
 }
 
 .show-btn {
+	opacity: 1;
+}
+
+.show-checking {
 	opacity: 1;
 }
