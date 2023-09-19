@@ -6,10 +6,6 @@ const monthBtns = document.querySelector('.month__div-btn')
 const checkingAmount = document.querySelector('.checking__amount')
 const monthInputs = document.querySelectorAll('.month__amount')
 
-function setTwoNumberDecimal(event) {
-	this.value = parseFloat(this.value).toFixed(2)
-}
-
 const checkInputs = () => {
 	for (let i = 0; i < allInputs.length; i++) {
 		if (allInputs[i].value == '') {
@@ -37,8 +33,10 @@ const clearInputs = () => {
 	allErrorsP.forEach(p => {
 		p.classList.remove('error-message')
 	})
+	const checkingDiv = document.querySelector('.checking__div')
 	wrapperRight.textContent = ''
 	monthBtns.classList.remove('show-btn')
+	checkingDiv.classList.remove('show-checking')
 }
 
 const addSchedule = () => {
@@ -72,6 +70,7 @@ const addSchedule = () => {
 		amountInput.classList.add('month__input', 'month__amount')
 		amountInput.value = parseFloat(billingValue / diffMonth).toFixed(2)
 		amountInput.addEventListener('keyup', checkAmountFunction)
+		amountInput.addEventListener('keyup', greenRedFunction)
 		amountInput.setAttribute('onchange', '(function(el){el.value=parseFloat(el.value).toFixed(2);})(this)')
 		newDiv.appendChild(dateInput)
 		newDiv.appendChild(amountInput)
@@ -86,22 +85,15 @@ const addSchedule = () => {
 }
 
 const checkAmountFunction = () => {
-	const billingValue = allInputs[2].value
 	const monthInputs = document.querySelectorAll('.month__amount')
 	let monthInputsArray = Array.from(monthInputs)
 	let mySum = 0
-	let myArray = []
 
 	for (i = 0; i < monthInputsArray.length; i++) {
 		mySum = mySum + parseFloat(monthInputsArray[i].value)
 	}
 	checkingAmount.textContent = parseFloat(mySum).toFixed(2)
-
-	// if (mySum == billingValue) {
-	// 	console.log('ok')
-	// } else {
-	// 	console.log('not ok')
-	// }
+	greenRedFunction()
 }
 
 const addMonthLine = () => {
@@ -122,6 +114,8 @@ const addMonthLine = () => {
 	allMonthInputs.forEach(input => {
 		input.value = parseFloat(billingValue / allMonthInputs.length).toFixed(2)
 	})
+	checkAmountFunction()
+	greenRedFunction()
 }
 
 const removeMonthLine = () => {
@@ -132,13 +126,35 @@ const removeMonthLine = () => {
 	allMonthInputs.forEach(input => {
 		input.value = parseFloat(billingValue / allMonthInputs.length).toFixed(2)
 	})
+	checkAmountFunction()
+	greenRedFunction()
+}
+
+const greenRedFunction = () => {
+	const billingValue = allInputs[2].value
+	const checkingAmountP = document.querySelector('.checking__amount')
+
+	if (billingValue == checkingAmountP.textContent) {
+		checkingAmountP.classList.remove('error-background')
+	} else {
+		checkingAmountP.classList.add('error-background')
+	}
+
+	// console.log(billingValue)
+	// console.log(checkingAmountP)
 }
 
 allBtn[0].addEventListener('click', checkInputs)
 allBtn[1].addEventListener('click', clearInputs)
 allBtn[2].addEventListener('click', addMonthLine)
 allBtn[3].addEventListener('click', removeMonthLine)
-// allBtn[4].addEventListener('click', checkAmountFunction)
+// allBtn[4].addEventListener('click', greenRedFunction)
+
+// This is quite nice function that is able to add space/coma sepparator for longer numbers. I need to figure it out how to make calculations then on those numbers
+
+// function numberWithCommas(x) {
+// 	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+// }
 
 // This is first function adding billing schedule but it was working only within one year
 
