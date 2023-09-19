@@ -6,6 +6,10 @@ const monthBtns = document.querySelector('.month__div-btn')
 const checkingAmount = document.querySelector('.checking__amount')
 const monthInputs = document.querySelectorAll('.month__amount')
 
+function setTwoNumberDecimal(event) {
+	this.value = parseFloat(this.value).toFixed(2)
+}
+
 const checkInputs = () => {
 	for (let i = 0; i < allInputs.length; i++) {
 		if (allInputs[i].value == '') {
@@ -68,6 +72,7 @@ const addSchedule = () => {
 		amountInput.classList.add('month__input', 'month__amount')
 		amountInput.value = parseFloat(billingValue / diffMonth).toFixed(2)
 		amountInput.addEventListener('keyup', checkAmountFunction)
+		amountInput.setAttribute('onchange', '(function(el){el.value=parseFloat(el.value).toFixed(2);})(this)')
 		newDiv.appendChild(dateInput)
 		newDiv.appendChild(amountInput)
 		wrapperRight.appendChild(newDiv)
@@ -90,7 +95,7 @@ const checkAmountFunction = () => {
 	for (i = 0; i < monthInputsArray.length; i++) {
 		mySum = mySum + parseFloat(monthInputsArray[i].value)
 	}
-	checkingAmount.textContent = mySum
+	checkingAmount.textContent = parseFloat(mySum).toFixed(2)
 
 	// if (mySum == billingValue) {
 	// 	console.log('ok')

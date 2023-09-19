@@ -33,7 +33,8 @@
 
       <div class="input__div">
         <label for="" class="input__label">billing amount</label>
-        <input type="number" name="" id="" class="input input__number">
+        <input type="number" name="" id="" class="input input__number" step="0.01" placeholder='0.00'
+          onchange="(function(el){el.value=parseFloat(el.value).toFixed(2);})(this)">
       </div>
 
       <p class="input__error">enter data</p>
@@ -53,13 +54,15 @@
 
       <div class="input__div checking__div">
         <p class="checking__p">Checking amount</p>
-        <p class="checking__p checking__amount"></p>
+        <p class="checking__p checking__amount"
+          onchange="(function(el){el.value=parseFloat(el.value).toFixed(2);})(this)"></p>
       </div>
 
 
     </div>
 
     <div class="wrapper__right">
+
 
       <!-- <div class="month__wrapper">
         <input type="date" class="month__input month__date">
@@ -69,6 +72,7 @@
     </div>
 
   </div>
+
 
   <script src="./js/main.js"></script>
 
